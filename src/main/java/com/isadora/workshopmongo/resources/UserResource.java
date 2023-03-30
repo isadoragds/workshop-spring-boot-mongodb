@@ -47,4 +47,10 @@ public class UserResource {
 		return ResponseEntity.created(uri).build(); //created retorna codigo 201 - quando cria novo recurso
 	}
 	
+	@RequestMapping(value ="/{id}", method = RequestMethod.DELETE) 
+	public ResponseEntity<Void> delete(@PathVariable String id) { //o pathvariable é pro id ser o mesmo que o recebido na url
+		service.delete(id);
+		return ResponseEntity.noContent().build(); //204 - no content 
+	}
+	
 }

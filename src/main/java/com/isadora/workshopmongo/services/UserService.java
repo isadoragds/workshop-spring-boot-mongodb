@@ -32,8 +32,14 @@ public class UserService {
 		return repo.insert(obj);
 	}
 	
+	public void delete(String id) {
+		findById(id);
+		repo.deleteById(id);
+	}
+	
 	//o metodo ta nessa classe e nao na classe do dto, pois essa classe tem a instanciacao do repositorio. caso no futuro, precise ter acesso ao banco
 	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
+	
 }
