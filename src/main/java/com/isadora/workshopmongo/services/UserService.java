@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isadora.workshopmongo.domain.User;
+import com.isadora.workshopmongo.dto.UserDTO;
 import com.isadora.workshopmongo.repository.UserRepository;
 import com.isadora.workshopmongo.services.exception.ObjectNotFoundException;
 
@@ -25,5 +26,14 @@ public class UserService {
 	public User findById(String id) {
 		Optional<User> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+	}
+	
+	public User insert(User obj) {
+		return repo.insert(obj);
+	}
+	
+	//o metodo ta nessa classe e nao na classe do dto, pois essa classe tem a instanciacao do repositorio. caso no futuro, precise ter acesso ao banco
+	public User fromDTO(UserDTO objDto) {
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
 }
